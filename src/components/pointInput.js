@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+    Button
+}
+from 'react-bootstrap';
 
 export default class PointsInput extends React.Component {
     constructor(props) {
@@ -9,6 +13,14 @@ export default class PointsInput extends React.Component {
         }
     }
     submit() {
+        if (this.state.csv === "") {
+            alert("Please fill in altitude and angle values");
+            return;
+        }
+        if (this.state.name === "") {
+            alert("Please fill in a name for the group of points")
+            return;
+        }
         this.setState({
             csv: '',
             name: ''
@@ -18,9 +30,11 @@ export default class PointsInput extends React.Component {
     onChange(event) {
         var type = event.target.name;
         if (type === "csv") {
-            this.setState({
-                csv: event.target.value
-            });
+            if (event.target.value.match(/^[,\s\d]*$/)) {
+                this.setState({
+                    csv: event.target.value
+                });
+            }
         } else {
             this.setState({
                 name: event.target.value
@@ -36,7 +50,7 @@ export default class PointsInput extends React.Component {
                     <label>Group Name:</label>
                     <input type="text" name="name" value={this.state.name} onChange={this.onChange.bind(this)} style={{width:"100%"}} ></input>
                 </div>
-                <button className="input-button" style={{display:"block", float:"right", marginTop:"10px"}} onClick={this.submit.bind(this)}>Submit</button>
+                <Button bsStyle="primary" className="input-button" style={{display:"block", float:"right", marginTop:"10px"}} onClick={this.submit.bind(this)}>Submit</Button>
             </div>
         );
     }

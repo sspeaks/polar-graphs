@@ -4,8 +4,10 @@
   "private": true,
   "homepage": "https://sspeaks610.github.io/polar-graphs",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "gh-pages": "^1.0.0",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.31.1",
     "react-dom": "^15.6.1",
     "react-p5-wrapper": "0.0.4",
     "react-scripts": "1.0.10"

@@ -22,9 +22,19 @@ export default function sketch(p) {
     var showText = true;
     var points = [];
     p.setup = function() {
-        p.createCanvas(600, 600);
-        p.textSize(p.height / 40);
+        p.windowResized();
     };
+    p.windowResized = function(){
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        if(600 <= width && 600 <= height) {
+            p.createCanvas(600, 600);
+        } else {
+            var min = (width > height) ? height : width;
+            p.createCanvas(min, min);
+        }
+        p.textSize(p.height / 40);
+    }
     p.myCustomRedrawAccordingToNewPropsHandler = function(props) {
         scale = props.scale;
         angleMax = props.degreeScale;
@@ -44,11 +54,11 @@ export default function sketch(p) {
 
         p.stroke(0);
         p.strokeWeight(1);
-        degreeLines(scale, angleMax);
+        degreeLines(scale-1, angleMax);
         radiusLines(scale, radiusMax);
         points.map((indexPoints) => indexPoints.map((point) => point.show()));
         if (showText) {
-            degreeLinesText(scale, angleMax);
+            degreeLinesText(scale-1, angleMax);
             radiusLinesText(scale, radiusMax);
         }
 
