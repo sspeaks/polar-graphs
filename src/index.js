@@ -181,7 +181,7 @@ class GraphApp extends React.Component {
     handleSubmit(val, name) {
         var data = val;
         var points = data.split("\n").map((str) => {
-            var [radius, degrees] = str.split(/[,\s]/).map((item) => parseInt(item.trim(), 10));
+            var [radius, degrees] = str.split(/[,\s]+/).map((item) => parseInt(item.trim(), 10));
             return {
                 r: radius,
                 d: degrees
