@@ -1,8 +1,8 @@
 import React from 'react';
 
 import P5Wrapper from 'react-p5-wrapper'
-import PointGroup from './pointGroup'
-import PointsInput from './pointInput'
+import PointGroup from './pointGroup.cmp'
+import PointsInput from './pointInput.cmp'
 import sketch from './sketch'
 export default class GraphApp extends React.Component {
     constructor(props) {
