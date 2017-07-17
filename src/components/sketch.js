@@ -24,10 +24,10 @@ export default function sketch(p) {
     p.setup = function() {
         p.windowResized();
     };
-    p.windowResized = function(){
+    p.windowResized = function() {
         var width = window.innerWidth;
         var height = window.innerHeight;
-        if(600 <= width && 600 <= height) {
+        if (600 <= width && 600 <= height) {
             p.createCanvas(600, 600);
         } else {
             var min = (width > height) ? height : width;
@@ -54,11 +54,11 @@ export default function sketch(p) {
 
         p.stroke(0);
         p.strokeWeight(1);
-        degreeLines(scale-1, angleMax);
+        degreeLines(10 - 1, angleMax);
         radiusLines(scale, radiusMax);
         points.map((indexPoints) => indexPoints.map((point) => point.show()));
         if (showText) {
-            degreeLinesText(scale-1, angleMax);
+            degreeLinesText(10 - 1, angleMax);
             radiusLinesText(scale, radiusMax);
         }
 
