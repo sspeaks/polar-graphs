@@ -16,7 +16,7 @@ export default class GraphApp extends React.Component {
     handleSubmit(val, name) {
         var data = val;
         var points = data.split("\n").map((str) => {
-            var [radius, degrees] = str.split(/[,\s]+/).map((item) => parseInt(item.trim(), 10));
+            var [radius, degrees] = str.split(/[,\s]+/).map((item) => parseFloat(item.trim().replace(/\D/,""), 10));
             return {
                 r: radius,
                 d: degrees
@@ -78,8 +78,8 @@ export default class GraphApp extends React.Component {
                 <PointsInput onClick={this.handleSubmit.bind(this)}/>
                 <P5Wrapper   sketch = {sketch}
                              pointHistory = {this.state.history}
-                             scale = {10}
-                             radiusScale = {1000}
+                             scale = {20}
+                             radiusScale = {2000}
                              degreeScale = {90}
                 />
                 <ul className="point-groups">
