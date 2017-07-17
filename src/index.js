@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import GraphApp from './components/graphApp'
+import GraphApp from './components/graphApp.cmp'
 
 // ========================================
 
