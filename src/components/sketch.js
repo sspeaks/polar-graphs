@@ -7,10 +7,11 @@ export default function sketch(p) {
 
         }
         show = function() {
-            p.stroke(p.color(this.color));
-            p.strokeWeight(15);
+            p.stroke(100);
+            p.strokeWeight(1);
+            p.fill(p.color(this.color));
             var drawRadius = p.map(this.radius, 0, (radiusMax / scale * (scale + 1)), 0, p.sqrt(2) * p.width);
-            p.point(drawRadius * p.cos(p.radians(this.degree)), -drawRadius * p.sin(p.radians(this.degree)));
+            p.ellipse(drawRadius * p.cos(p.radians(this.degree)), -drawRadius * p.sin(p.radians(this.degree)), 12);
         }
         setColor(hex) {
             this.color = hex;
@@ -54,9 +55,11 @@ export default function sketch(p) {
 
         p.stroke(0);
         p.strokeWeight(1);
+
         degreeLines(10 - 1, angleMax);
         radiusLines(scale, radiusMax);
         points.map((indexPoints) => indexPoints.map((point) => point.show()));
+        p.fill(0);
         if (showText) {
             degreeLinesText(10 - 1, angleMax);
             radiusLinesText(scale, radiusMax);
@@ -110,7 +113,7 @@ export default function sketch(p) {
             p.stroke(150);
             p.push();
             p.rotate(-curAngle);
-            p.translate(p.width / 3 + p.width / (num + 1), 0);
+            p.translate(p.width / 4 + p.width / (num + 1), 0);
             p.strokeWeight(2);
             p.text(scale / (num) * i + "°", 0, 0);
             p.strokeWeight(1);
