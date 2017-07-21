@@ -30,7 +30,7 @@ export default class PointsInput extends React.Component {
     onChange(event) {
         var type = event.target.name;
         if (type === "csv") {
-            if (event.target.value.match(/^[\.,\s\d\D]*$/)) {
+            if (event.target.value.match(/^[.,\s\d\D]*$/)) {
                 this.setState({
                     csv: event.target.value
                 });

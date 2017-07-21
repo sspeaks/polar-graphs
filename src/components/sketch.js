@@ -1,25 +1,32 @@
 export default function sketch(p) {
     class Point {
-        constructor(radius, degree, color) {
+        constructor(radius, degree, color, size) {
             this.radius = radius;
             this.degree = degree;
-            this.color = color
+            this.color = color;
+            this.size = size;
 
         }
         show = function() {
             p.stroke(p.color(this.color));
-            p.strokeWeight(15);
+            p.stroke(100);
+            p.strokeWeight(1);
+            p.fill(p.color(this.color));
             var drawRadius = p.map(this.radius, 0, (radiusMax / scale * (scale + 1)), 0, p.sqrt(2) * p.width);
-            p.point(drawRadius * p.cos(p.radians(this.degree)), -drawRadius * p.sin(p.radians(this.degree)));
+            p.ellipse(drawRadius * p.cos(p.radians(this.degree)), -drawRadius * p.sin(p.radians(this.degree)), this.size);
         }
         setColor(hex) {
             this.color = hex;
+        }
+        setSize(size) {
+            this.size = size;
         }
     }
     var scale = 10;
     var angleMax = 90;
     var radiusMax = 100;
     var showText = true;
+    var degreePosition = 3;
     var points = [];
     p.setup = function() {
         p.windowResized();
@@ -39,10 +46,11 @@ export default function sketch(p) {
         scale = props.scale;
         angleMax = props.degreeScale;
         radiusMax = props.radiusScale;
+        degreePosition = props.degreePosition
         points = props.pointHistory.map((tPoints) => {
             var currPoint = [];
             for (var i = 0; i < tPoints.points.length; i++) {
-                currPoint.push(new Point(tPoints.points[i].r, tPoints.points[i].d, tPoints.color));
+                currPoint.push(new Point(tPoints.points[i].r, tPoints.points[i].d, tPoints.color, tPoints.size));
             }
             return currPoint;
         });
@@ -55,11 +63,12 @@ export default function sketch(p) {
         p.stroke(0);
         p.strokeWeight(1);
         degreeLines(10 - 1, angleMax);
-        radiusLines(scale, radiusMax);
+        radiusLines(parseFloat(scale), parseFloat(radiusMax));
         points.map((indexPoints) => indexPoints.map((point) => point.show()));
+        p.fill(0);
         if (showText) {
             degreeLinesText(10 - 1, angleMax);
-            radiusLinesText(scale, radiusMax);
+            radiusLinesText(parseFloat(scale), parseFloat(radiusMax));
         }
 
     };
@@ -84,7 +93,9 @@ export default function sketch(p) {
             p.push();
             p.translate(p.sqrt(2) * dist / 4, -p.sqrt(2) * dist / 4)
             p.rotate(p.radians(45));
-            p.text(scale / num * i + "km", -15, 0);
+            p.textAlign(p.CENTER);
+            p.text(scale / num * i + "km", 0, 0);
+            p.textAlign(p.LEFT);
             p.pop();
             p.strokeWeight(1);
         }
@@ -110,7 +121,7 @@ export default function sketch(p) {
             p.stroke(150);
             p.push();
             p.rotate(-curAngle);
-            p.translate(p.width / 3 + p.width / (num + 1), 0);
+            p.translate(p.width / degreePosition + p.width / (num + 1), 0);
             p.strokeWeight(2);
             p.text(scale / (num) * i + "°", 0, 0);
             p.strokeWeight(1);
