@@ -34,9 +34,11 @@ export default class GraphApp extends React.Component {
             size: 15
         });
         var pointGroups = this.state.pointGroups.slice();
-        pointGroups.push(<PointGroup key={this.state.addition + 1} size='15' name={name} addition={this.state.addition + 1} color="#FF0000"
-            handleColorChange={this.handleColorChange.bind(this)} handleSizeChange={this.handleSizeChange.bind(this)}
-            dismissColorGroup={this.dismissColorGroup.bind(this)}/>)
+        pointGroups.push(
+            <PointGroup key={this.state.addition + 1} size='15' name={name} addition={this.state.addition + 1} color="#FF0000"
+                handleColorChange={this.handleColorChange.bind(this)} handleSizeChange={this.handleSizeChange.bind(this)}
+                dismissColorGroup={this.dismissColorGroup.bind(this)}/>
+        )
         this.setState({
             history: history,
             addition: this.state.addition + 1,

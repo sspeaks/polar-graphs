@@ -8,7 +8,6 @@ export default function sketch(p) {
 
         }
         show = function() {
-            p.stroke(p.color(this.color));
             p.stroke(100);
             p.strokeWeight(1);
             p.fill(p.color(this.color));
@@ -43,10 +42,10 @@ export default function sketch(p) {
         p.textSize(p.height / 40);
     }
     p.myCustomRedrawAccordingToNewPropsHandler = function(props) {
-        scale = props.scale;
+        scale = parseFloat(props.scale);
         angleMax = props.degreeScale;
-        radiusMax = props.radiusScale;
-        degreePosition = props.degreePosition
+        radiusMax = parseFloat(props.radiusScale);
+        degreePosition = parseFloat(props.degreePosition)
         points = props.pointHistory.map((tPoints) => {
             var currPoint = [];
             for (var i = 0; i < tPoints.points.length; i++) {
@@ -62,13 +61,14 @@ export default function sketch(p) {
 
         p.stroke(0);
         p.strokeWeight(1);
+
         degreeLines(10 - 1, angleMax);
-        radiusLines(parseFloat(scale), parseFloat(radiusMax));
+        radiusLines(scale, radiusMax);
         points.map((indexPoints) => indexPoints.map((point) => point.show()));
         p.fill(0);
         if (showText) {
             degreeLinesText(10 - 1, angleMax);
-            radiusLinesText(parseFloat(scale), parseFloat(radiusMax));
+            radiusLinesText(scale, radiusMax);
         }
 
     };
