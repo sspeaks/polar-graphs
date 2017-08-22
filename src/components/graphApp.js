@@ -14,7 +14,7 @@ export default class GraphApp extends React.Component {
             addition: 0,
             radiusRange: 2000,
             radiusLineCount: 10,
-            degreePosition: 6.5,
+            degreePosition: 3,
         };
     }
     handleSubmit(val, name) {
@@ -110,7 +110,7 @@ export default class GraphApp extends React.Component {
                     scale = {this.state.radiusLineCount}
                     radiusScale = {this.state.radiusRange}
                     degreePosition = {this.state.degreePosition}
-                    degreeScale = {180}
+                    degreeScale = {90}
                 />
                 <ul className="point-groups">
                     <p style={{fontSize:"20px"}}>{(this.state.pointGroups.length > 0) ? "Point Groups" : ""}</p>
@@ -123,8 +123,3 @@ export default class GraphApp extends React.Component {
         )
     }
 }
-
-
-
-// WEBPACK FOOTER //
-// ./src/components/graphApp.js

@@ -87,8 +87,3 @@ export default class SketchCustomize extends React.Component {
         );
     }
 }
-
-
-
-// WEBPACK FOOTER //
-// ./src/components/sketchCustomize.js

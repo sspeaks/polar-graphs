@@ -14,9 +14,9 @@ canvas {
     margin-right: 1vw;
     margin-bottom: auto;
     margin-top: 1vh;
-    right:0px;
+    right:250px;
     bottom: 0px;
-    top: 0px;
+    top:50px;
 }
 
 .points-input-div {
