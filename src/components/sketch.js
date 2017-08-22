@@ -11,7 +11,7 @@ export default function sketch(p) {
             p.stroke(100);
             p.strokeWeight(1);
             p.fill(p.color(this.color));
-            var drawRadius = p.map(this.radius, 0, (radiusMax / scale * (scale + 1)), 0, p.sqrt(2) * p.width);
+            var drawRadius = p.map(this.radius, 0, (radiusMax / scale * (scale + 1)), 0, p.height);
             p.ellipse(drawRadius * p.cos(p.radians(this.degree)), -drawRadius * p.sin(p.radians(this.degree)), this.size);
         }
         setColor(hex) {
@@ -22,7 +22,7 @@ export default function sketch(p) {
         }
     }
     var scale = 10;
-    var angleMax = 90;
+    var angleMax = 180;
     var radiusMax = 100;
     var showText = true;
     var degreePosition = 3;
@@ -33,8 +33,8 @@ export default function sketch(p) {
     p.windowResized = function() {
         var width = window.innerWidth;
         var height = window.innerHeight;
-        if (600 <= width && 600 <= height) {
-            p.createCanvas(600, 600);
+        if (1300 <= width && 850 <= height) {
+            p.createCanvas(1300, 850);
         } else {
             var min = (width > height) ? height : width;
             p.createCanvas(min, min);
@@ -56,18 +56,18 @@ export default function sketch(p) {
 
     };
     p.draw = function() {
-        p.translate(0, p.height);
+        p.translate(p.width/2, p.height);
         p.background(255);
 
         p.stroke(0);
         p.strokeWeight(1);
 
-        degreeLines(10 - 1, angleMax);
+        degreeLines(18, angleMax);
         radiusLines(scale, radiusMax);
         points.map((indexPoints) => indexPoints.map((point) => point.show()));
         p.fill(0);
         if (showText) {
-            degreeLinesText(10 - 1, angleMax);
+            degreeLinesText(18, angleMax);
             radiusLinesText(scale, radiusMax);
         }
 
@@ -76,8 +76,8 @@ export default function sketch(p) {
         return 2 * frac * p.height
     };
     var radiusLines = function(num, scale) {
-        for (var i = 0; i < num + 1; i++) {
-            var dist = toScale(i * Math.sqrt(2) / (num + 1));
+        for (var i = 0; i < num + (num * 2); i++) {
+            var dist = i * (2 * p.height / (num + 1))
             p.stroke(150);
             p.noFill();
             p.ellipse(0, 0, dist);
@@ -86,13 +86,12 @@ export default function sketch(p) {
     };
     var radiusLinesText = function(num, scale) {
         for (var i = 0; i < num + 1; i++) {
-            var dist = toScale(i * Math.sqrt(2) / (num + 1));
+            var dist = i * (p.height / (num + 1))
             p.stroke(150);
             p.fill(0);
             p.strokeWeight(2);
             p.push();
-            p.translate(p.sqrt(2) * dist / 4, -p.sqrt(2) * dist / 4)
-            p.rotate(p.radians(45));
+            p.translate(0, -dist);
             p.textAlign(p.CENTER);
             p.text(scale / num * i + "km", 0, 0);
             p.textAlign(p.LEFT);
@@ -102,7 +101,7 @@ export default function sketch(p) {
     }
     var degreeLines = function(num, scale) {
         var angle = 0;
-        var d_angle = (p.PI / 2) / num;
+        var d_angle = (p.PI) / num;
         var width = (p.sqrt(2) * p.width);
         var height = (p.sqrt(2) * p.width);
         var x = (angle, radius) => radius * p.cos(angle);
@@ -115,7 +114,7 @@ export default function sketch(p) {
     };
     var degreeLinesText = function(num, scale) {
         var angle = 0;
-        var d_angle = (p.PI / 2) / num;
+        var d_angle = (p.PI) / num;
         for (var i = 0; i < num; i++) {
             var curAngle = angle + (d_angle * i);
             p.stroke(150);
@@ -129,3 +128,8 @@ export default function sketch(p) {
         }
     }
 };
+
+
+
+// WEBPACK FOOTER //
+// ./src/components/sketch.js

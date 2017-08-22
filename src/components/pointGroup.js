@@ -12,3 +12,8 @@ export default function PointGroup(props) {
         </li>
     );
 }
+
+
+
+// WEBPACK FOOTER //
+// ./src/components/pointGroup.js

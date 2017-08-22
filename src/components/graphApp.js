@@ -14,13 +14,14 @@ export default class GraphApp extends React.Component {
             addition: 0,
             radiusRange: 2000,
             radiusLineCount: 10,
-            degreePosition: 3,
+            degreePosition: 6.5,
         };
     }
     handleSubmit(val, name) {
         var data = val;
         var points = data.split("\n").map((str) => {
-            var [radius, degrees] = str.split(/[,\s]+/).map((item) => parseFloat(item.trim().replace(/\D/, ""), 10));
+            console.log(str);
+            var [radius, degrees] = str.split(/[,\s]+/).map((item) => parseFloat(item.trim().replace(/a-zA-Z/, "")));
             return {
                 r: radius,
                 d: degrees
@@ -103,18 +104,17 @@ export default class GraphApp extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="title-header">Polar Graph</h1>
                 <PointsInput onClick={this.handleSubmit.bind(this)}/>
                 <P5Wrapper   sketch = {sketch}
                     pointHistory = {this.state.history}
                     scale = {this.state.radiusLineCount}
                     radiusScale = {this.state.radiusRange}
                     degreePosition = {this.state.degreePosition}
-                    degreeScale = {90}
+                    degreeScale = {180}
                 />
                 <ul className="point-groups">
                     <p style={{fontSize:"20px"}}>{(this.state.pointGroups.length > 0) ? "Point Groups" : ""}</p>
-                    <div style={{width:"400px", height:"300px"}}>
+                    <div style={{width:"400px", height:"200px", overflowX:"scroll"}}>
                         {this.state.pointGroups}
                     </div>
                 </ul>
@@ -123,3 +123,8 @@ export default class GraphApp extends React.Component {
         )
     }
 }
+
+
+
+// WEBPACK FOOTER //
+// ./src/components/graphApp.js

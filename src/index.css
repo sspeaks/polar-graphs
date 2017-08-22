@@ -10,11 +10,10 @@ input, textarea, .form-control {
 canvas {
     border: solid 1px #000;
     position:absolute;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 1vw;
+    margin-right: 1vw;
     margin-bottom: auto;
-    margin-top: 10vh;
-    left:0px;
+    margin-top: 1vh;
     right:0px;
     bottom: 0px;
     top: 0px;
@@ -46,11 +45,11 @@ canvas {
     width:400px;
     position:absolute;
     display:table;
-    top:0px;
     bottom:0px;
-    right:0px;
+    left:0px;
     margin: auto;
-    margin-right: 100px;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .title-header {

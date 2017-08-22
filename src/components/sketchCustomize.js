@@ -10,7 +10,7 @@ export default class SketchCustomize extends React.Component {
         this.state = {
             radiusRange: 2000,
             radiusLineCount: 10,
-            degreePosition: 3
+            degreePosition: 6.5
         };
 
     }
@@ -53,7 +53,7 @@ export default class SketchCustomize extends React.Component {
     }
     render() {
         return (
-            <Grid style={{width:'33%', position:'absolute', left:'0px', right:'0px', bottom:'0px', marginLeft:'auto', marginRight:'auto', marginBottom:'20px'}}>
+            <Grid style={{width:'25%', position:'absolute', left:'0px', marginTop: '20px', marginLeft:'auto', marginRight:'auto', marginBottom:'20px'}}>
                 <Row>
                     <Col sm={3} style={{display:'inline-block'}}>
                         <ControlLabel>Degree Label Position</ControlLabel>
@@ -87,3 +87,8 @@ export default class SketchCustomize extends React.Component {
         );
     }
 }
+
+
+
+// WEBPACK FOOTER //
+// ./src/components/sketchCustomize.js

@@ -55,3 +55,8 @@ export default class PointsInput extends React.Component {
         );
     }
 }
+
+
+
+// WEBPACK FOOTER //
+// ./src/components/pointInput.js
