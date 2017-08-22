@@ -10,7 +10,8 @@ export default class SketchCustomize extends React.Component {
         this.state = {
             radiusRange: 2000,
             radiusLineCount: 10,
-            degreePosition: 6.5
+            degreePosition: 6.5,
+            secondaryDotStyle: 'Solid'
         };
 
     }
@@ -18,7 +19,6 @@ export default class SketchCustomize extends React.Component {
         var type = event.target.name;
         if (event.target.value.match(/^[\d]*$/)) {
             if (type === "radiusRange") {
-
                 this.setState({
                     radiusRange: event.target.value
                 });
@@ -35,6 +35,11 @@ export default class SketchCustomize extends React.Component {
                 });
             }
         }
+        if (type === 'secondaryDotStyle') {
+            this.setState({
+                secondaryDotStyle: event.target.value
+            })
+        }
     }
     onClick() {
         if (this.state.radiusRange === "") {
@@ -49,7 +54,7 @@ export default class SketchCustomize extends React.Component {
             alert("Please enter a value to evaluate the position of the degree symbols")
             return;
         }
-        this.props.onClick(this.state.radiusRange, this.state.radiusLineCount, this.state.degreePosition)
+        this.props.onClick(this.state.radiusRange, this.state.radiusLineCount, this.state.degreePosition, this.state.secondaryDotStyle)
     }
     render() {
         return (
@@ -76,6 +81,18 @@ export default class SketchCustomize extends React.Component {
                     </Col>
                     <Col sm={9} style={{display:'inline-block'}}>
                         <FormControl type="text" name="radiusLineCount" value={this.state.radiusLineCount} onChange={this.onChange.bind(this)}></FormControl>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={3} style={{display:'inline-block'}}>
+                        <ControlLabel>Secondary Dot Style</ControlLabel>
+                    </Col>
+                    <Col sm={9} style={{display:'inline-block'}}>
+                        <FormControl name='secondaryDotStyle' componentClass="select" placeholder="select" onChange={this.onChange.bind(this)}>
+                            <option value="Solid">Solid</option>
+                            <option value="Hollow">Hollow</option>
+                            <option value="X">X</option>
+                        </FormControl>
                     </Col>
                 </Row>
                 <Row>

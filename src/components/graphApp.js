@@ -14,16 +14,18 @@ export default class GraphApp extends React.Component {
             addition: 0,
             radiusRange: 2000,
             radiusLineCount: 10,
-            degreePosition: 3,
+            degreePosition: 6.5,
+            secondaryDotStyle: 'Solid'
         };
     }
     handleSubmit(val, name) {
         var data = val;
         var points = data.split("\n").map((str) => {
             console.log(str);
-            var [radius, degrees] = str.split(/[,\s]+/).map((item) => parseFloat(item.trim().replace(/a-zA-Z/, "")));
+            var [degrees, apogee, perigee] = str.split(/[,\s]+/).map((item) => parseFloat(item.trim().replace(/a-zA-Z/, "")));
             return {
-                r: radius,
+                a: apogee,
+                p: perigee,
                 d: degrees
             };
         });
@@ -94,11 +96,12 @@ export default class GraphApp extends React.Component {
             history: history
         });
     }
-    handleSettingsChange(range, num, pos) {
+    handleSettingsChange(range, num, pos, sec) {
         this.setState({
             radiusLineCount: num,
             radiusRange: range,
-            degreePosition: pos
+            degreePosition: pos,
+            secondaryDotStyle: sec
         });
     }
     render() {
@@ -111,6 +114,7 @@ export default class GraphApp extends React.Component {
                     radiusScale = {this.state.radiusRange}
                     degreePosition = {this.state.degreePosition}
                     degreeScale = {90}
+                    secondaryDotStyle = {this.state.secondaryDotStyle}
                 />
                 <ul className="point-groups">
                     <p style={{fontSize:"20px"}}>{(this.state.pointGroups.length > 0) ? "Point Groups" : ""}</p>

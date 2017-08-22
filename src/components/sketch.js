@@ -1,18 +1,41 @@
 export default function sketch(p) {
     class Point {
-        constructor(radius, degree, color, size) {
-            this.radius = radius;
+        constructor(apogee, perigee, degree, color, size, style) {
+            this.apogee = apogee;
+            this.perigee = perigee;
             this.degree = degree;
             this.color = color;
             this.size = size;
+            this.style = style;
 
         }
         show = function() {
             p.stroke(100);
             p.strokeWeight(1);
             p.fill(p.color(this.color));
-            var drawRadius = p.map(this.radius, 0, (radiusMax / scale * (scale + 1)), 0, p.sqrt(2) * p.width);
+            var drawRadius = p.map(this.apogee, 0, (radiusMax / scale * (scale + 1)), 0, p.sqrt(2) * p.width);
             p.ellipse(drawRadius * p.cos(p.radians(this.degree)), -drawRadius * p.sin(p.radians(this.degree)), this.size);
+            drawRadius = p.map(this.perigee, 0, (radiusMax / scale * (scale + 1)), 0, p.sqrt(2) * p.width);
+            switch (this.style) {
+                case 'X':
+                    p.textSize(this.size);
+                    p.stroke(this.color);
+                    p.strokeWeight(2);
+                    p.textAlign(p.CENTER, p.CENTER);
+                    p.text('X', drawRadius * p.cos(p.radians(this.degree)), -drawRadius * p.sin(p.radians(this.degree)));
+                    break;
+                case 'Solid':
+                    p.ellipse(drawRadius * p.cos(p.radians(this.degree)), -drawRadius * p.sin(p.radians(this.degree)), this.size);
+                    break;
+                case 'Hollow':
+                    p.stroke(this.color);
+                    p.strokeWeight(2);
+                    p.noFill();
+                    p.ellipse(drawRadius * p.cos(p.radians(this.degree)), -drawRadius * p.sin(p.radians(this.degree)), this.size);
+                    break;
+                default:
+                    p.ellipse(drawRadius * p.cos(p.radians(this.degree)), -drawRadius * p.sin(p.radians(this.degree)), this.size);
+            }
         }
         setColor(hex) {
             this.color = hex;
@@ -26,6 +49,7 @@ export default function sketch(p) {
     var radiusMax = 100;
     var showText = true;
     var degreePosition = 6.5;
+    var secondaryDotStyle = 'Solid';
     var points = [];
     p.setup = function() {
         p.windowResized();
@@ -46,10 +70,11 @@ export default function sketch(p) {
         angleMax = props.degreeScale;
         radiusMax = parseFloat(props.radiusScale);
         degreePosition = parseFloat(props.degreePosition)
+        secondaryDotStyle = props.secondaryDotStyle;
         points = props.pointHistory.map((tPoints) => {
             var currPoint = [];
             for (var i = 0; i < tPoints.points.length; i++) {
-                currPoint.push(new Point(tPoints.points[i].r, tPoints.points[i].d, tPoints.color, tPoints.size));
+                currPoint.push(new Point(tPoints.points[i].a, tPoints.points[i].p, tPoints.points[i].d, tPoints.color, tPoints.size, secondaryDotStyle));
             }
             return currPoint;
         });
@@ -61,10 +86,11 @@ export default function sketch(p) {
 
         p.stroke(0);
         p.strokeWeight(1);
-
         degreeLines(9, angleMax);
         radiusLines(scale, radiusMax);
         points.map((indexPoints) => indexPoints.map((point) => point.show()));
+        p.textSize(p.height / 40);
+        p.textAlign(p.LEFT, p.TOP);
         p.fill(0);
         if (showText) {
             degreeLinesText(9, angleMax);

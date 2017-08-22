@@ -44,7 +44,7 @@ export default class PointsInput extends React.Component {
     render() {
         return (
             <div className="points-input-div">
-                <label style={{display:"block",fontSize:"20px"}}>Comma seperated points (radius, angle)</label>
+                <label style={{display:"block",fontSize:"20px"}}>Comma seperated points (Angle, Apogee, Perigee)</label>
                 <textArea cols="50" name="csv" value={this.state.csv} onChange={this.onChange.bind(this)} className="pointsInput"></textArea>
                 <div>
                     <label>Group Name:</label>
